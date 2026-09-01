@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "name": "Native Logger Quest",
   "version": "1.0.0",
-  "revision": "1eb584153590503d08b319c3d97d9c35eb090cec",
-  "archiveUrl": "https://github.com/Loud160/NativeLoggerQuest/archive/1eb584153590503d08b319c3d97d9c35eb090cec.zip",
-  "archiveSha256": "26f86c51579f8dd8a7ab8bcad54c08d2466b6a5870af1556dc0ef4d2b2a4a5c5",
-  "sourceDirectory": "NativeLoggerQuest-1eb584153590503d08b319c3d97d9c35eb090cec"
+  "revision": "b83b21bbafa1b33c3f36640ded3c2933b5e88085",
+  "archiveUrl": "https://github.com/Loud160/NativeLoggerQuest/archive/b83b21bbafa1b33c3f36640ded3c2933b5e88085.zip",
+  "archiveSha256": "784ff534c97037e91dc475915aa6cbeb92875fa0994b9f3410b1353b6452a0af",
+  "sourceDirectory": "NativeLoggerQuest-b83b21bbafa1b33c3f36640ded3c2933b5e88085"
 }
