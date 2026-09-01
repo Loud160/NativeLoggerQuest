@@ -35,7 +35,8 @@ namespace {
     {
         // Paper2's public C ABI orders its levels as Info, Warn, Error,
         // Debug, Crit, Off. These numeric values are used only at the private
-        // linker-wrap boundary; Big Screen does not initialize or call Paper.
+        // linker-wrap boundary; the consuming mod does not initialize or call
+        // Paper through this private bridge.
         switch(level)
         {
             case 0:
@@ -55,11 +56,11 @@ namespace {
 }
 
 // beatsaber-hook's inline SAFE_ABORT helpers currently route their diagnostics
-// through two Paper2 C-ABI calls. Link-time --wrap redirects only the
-// references linked into libbigscreen.so to these hidden functions. Their
-// names are not exported and cannot satisfy, replace, or intercept Paper2 calls
-// made by BSML, SongCore, or any other mod. This preserves hook failure details
-// without giving Big Screen a runtime dependency on Paper's ABI.
+// through two Paper2 C-ABI calls. Link-time --wrap redirects only references
+// linked into the one consuming mod to these hidden functions. Their names are
+// not exported and cannot satisfy, replace, or intercept Paper2 calls made by
+// BSML, SongCore, or any other mod. This preserves hook failure details without
+// giving the consumer a runtime dependency on Paper's ABI.
 extern "C" __attribute__((visibility("hidden"))) bool
 __wrap_paper2_queue_log_bytes_ffi(
     int level,
@@ -77,7 +78,7 @@ __wrap_paper2_queue_log_bytes_ffi(
     try
     {
         // Off is intentionally discarded, matching the source logger's
-        // disabled level without allocating or waking Big Screen's writer.
+        // disabled level without allocating or waking the consumer's writer.
         if(level == 5)
             return true;
 

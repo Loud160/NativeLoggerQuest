@@ -40,6 +40,27 @@ The caller supplies its own active and previous file paths through
 `NativeLoggerOptions`, then initializes the logger before ordinary mod systems
 or dependency APIs are used.
 
+## Current-source manifest
+
+Consumers that should automatically receive reviewed logger updates can read
+[`native-logger-current.json`](native-logger-current.json). The small moving
+manifest never points a build at arbitrary branch contents: it names an
+immutable official commit archive, its SHA-256 digest, expected archive root,
+and the logger version. A consumer should validate all of those fields, cache
+the verified archive/source, and print or record the resolved revision in its
+build output.
+
+Publishing an update is deliberately two-step:
+
+1. commit, test, and push the logger source change;
+2. calculate the SHA-256 of that immutable commit archive, then update and
+   commit `native-logger-current.json`.
+
+This keeps the manifest out of the archive it identifies and avoids a circular
+commit hash. Consumers can use their last verified cached revision during a
+temporary network outage, but must never accept an archive whose digest does
+not match the manifest.
+
 ## Optional beatsaber-hook abort bridge
 
 Some beatsaber-hook inline abort helpers refer to Paper2 C-ABI functions even
